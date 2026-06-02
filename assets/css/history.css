@@ -1,0 +1,12 @@
+body{font-family:Arial,sans-serif;background:#f8fafc;margin:0}
+.container{width:90%;max-width:1000px;margin:30px auto}
+.card,.summary{background:#fff;padding:16px;border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.08);margin-bottom:16px}
+.status-pending{border-left:6px solid #f59e0b}
+.status-verified{border-left:6px solid #16a34a}
+.status-rejected{border-left:6px solid #dc2626}
+.summary.verified{border-left:6px solid #16a34a}
+.summary.pending{border-left:6px solid #f59e0b}
+.summary.rejected{border-left:6px solid #dc2626}
+.pagination{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
+.pagination a{padding:8px 12px;background:#e5e7eb;text-decoration:none;border-radius:8px;color:#111}
+.pagination a.active{background:#2563eb;color:#fff}

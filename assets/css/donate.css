@@ -1,0 +1,7 @@
+body{font-family:Arial,sans-serif;background:#eff6ff;margin:0}
+.container{width:90%;max-width:800px;margin:30px auto}
+.donate-card{background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.donate-card input,.donate-card select,.donate-card textarea,.donate-card button{width:100%;padding:10px;margin:8px 0;box-sizing:border-box;border:1px solid #ccc;border-radius:8px}
+.donate-card button{background:#2563eb;color:#fff;border:none}
+.error{color:#dc2626}
+.success{color:#16a34a}

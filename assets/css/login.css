@@ -1,0 +1,6 @@
+body{font-family:Arial,sans-serif;background:#eef2ff;margin:0}
+.auth-box{width:380px;max-width:92%;margin:70px auto;background:#fff;padding:24px;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.auth-box input,.auth-box textarea,.auth-box select,.auth-box button{width:100%;padding:10px;margin:8px 0;box-sizing:border-box;border:1px solid #ccc;border-radius:8px}
+.auth-box button{background:#2563eb;color:#fff;border:none;cursor:pointer}
+.error{color:#dc2626}
+.success{color:#16a34a}
