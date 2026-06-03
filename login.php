@@ -52,7 +52,8 @@ if (isset($_POST['login'])) {
             align-items: center;
             justify-content: center;
             position: relative;
-            overflow: hidden;
+            overflow-y: auto;
+            padding: 40px 16px;
         }
 
         /* Background decoration */
@@ -80,7 +81,7 @@ if (isset($_POST['login'])) {
             margin-bottom: 28px;
         }
         .brand-icon {
-            width: 250px; height: 250px;
+            width: 110px; height: 110px;
             border-radius: 16px;
             display: inline-flex; align-items: center; justify-content: center;
             margin-bottom: 12px;
@@ -232,22 +233,24 @@ if (isset($_POST['login'])) {
 
         .divider {
             text-align: center;
-            margin: 22px 0 18px;
+            margin: 28px 0 24px;
             position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        .divider::before {
+        .divider::before,
+        .divider::after {
             content: '';
-            position: absolute;
-            top: 50%; left: 0; right: 0;
+            flex: 1;
             height: 1px;
-            background: rgba(255,255,255,.08);
+            background: rgba(255,255,255,.1);
         }
         .divider span {
-            position: relative;
-            background: transparent;
-            padding: 0 12px;
             font-size: 0.75rem;
             color: #475569;
+            white-space: nowrap;
+            padding: 0 4px;
         }
 
         .register-link {
@@ -282,18 +285,17 @@ if (isset($_POST['login'])) {
 
         <div class="brand">
             <div class="brand-icon">
-                <img src="uploads/Logo_Crowdfunding Social.png" alt="Logo Crowdfunding Sosial">
+                <img src="uploads/LogoBerbagiDonasiSocial3.PNG" alt="Logo Crowdfunding Sosial">
             </div>
             <h1>
-                <!-- <strong>Crowdfunding Sosial</strong> -->
-                <!-- Bersama Kita -->
-                 <strong>LOGIN AKUN CROWDFUNDING SOCIAL</strong>
+                <STRONG>
+                LOGIN AKUN BERBAGI DONASI SOCIAL</STRONG>
             </h1>
         </div>
 
         <div class="login-card">
             <div class="card-title">Masuk ke Akun</div>
-            <div class="card-sub">Selamat datang kembali 👋</div>
+            <div class="card-sub">Selamat datang kembali</div>
 
             <?php if ($error): ?>
                 <div class="alert-error">⚠️ <?= htmlspecialchars($error) ?></div>
@@ -350,10 +352,6 @@ if (isset($_POST['login'])) {
             </div>
         </div>
 
-        <div class="back-home">
-            <a href="index.php">← Kembali ke Beranda</a>
-        </div>
-    </div>
 
     <script>
         const eyeBtn    = document.getElementById('eyeBtn');

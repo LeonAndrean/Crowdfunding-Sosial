@@ -214,7 +214,7 @@ $imgExists = !empty($campaign['image']) && file_exists($imgPath);
 <body>
     <div class="topbar">
         <h1>Edit Campaign</h1>
-        <a href="manager_dashboard.php" class="btn-back">← Kembali ke Dashboard</a>
+        <a href="manager_dashboard.php" class="btn-back">Kembali ke Dashboard</a>
     </div>
 
     <div class="page-wrap">
