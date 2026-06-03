@@ -115,18 +115,7 @@ Aktifkan modul Apache dan MySQL melalui XAMPP Control Panel.
 - Pilih tab Import, lalu pilih file `projekmini2_db.sql` dari folder project
 - Klik Go untuk mengeksekusi
 
-**5. Jalankan patch kolom avatar**
-
-Masih di phpMyAdmin, pilih database `projekmini2_db`, buka tab SQL, lalu jalankan isi file `add_avatar_column.sql`:
-
-```sql
-ALTER TABLE `users`
-  ADD COLUMN `avatar` VARCHAR(255) DEFAULT NULL AFTER `address`;
-```
-
-Langkah ini diperlukan agar fitur foto profil pada halaman pengaturan akun dapat berfungsi.
-
-**6. Sesuaikan konfigurasi (jika diperlukan)**
+**5. Sesuaikan konfigurasi (jika diperlukan)**
 
 Buka file `config.php` dan sesuaikan kredensial database jika berbeda dari pengaturan default XAMPP:
 
@@ -137,7 +126,7 @@ $pass = "";
 $db   = "projekmini2_db";
 ```
 
-**7. Buka aplikasi**
+**6. Buka aplikasi**
 
 Akses melalui browser:
 
