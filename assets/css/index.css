@@ -400,23 +400,38 @@ body {
 .empty-state p { font-size: 1rem; }
 
 /* ── Pagination ── */
+/* ── Pagination ── */
+.pagination-wrap {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+.pagination-info {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
 .pagination {
     display: flex;
-    gap: 8px;
-    margin-top: 36px;
+    gap: 6px;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
 }
-.pagination a {
+.pagination a,
+.pagination span {
     padding: 9px 16px;
     background: #fff;
     text-decoration: none;
     border-radius: 10px;
     color: var(--text);
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     font-weight: 600;
     border: 1.5px solid var(--border);
     transition: background .2s, border-color .2s, color .2s;
+    display: inline-flex;
+    align-items: center;
 }
 .pagination a:hover {
     background: #eff6ff;
@@ -427,6 +442,25 @@ body {
     background: var(--blue);
     color: #fff;
     border-color: var(--blue);
+    box-shadow: 0 2px 8px rgba(37,99,235,.25);
+}
+.pagination .pag-prev,
+.pagination .pag-next {
+    padding: 9px 18px;
+    font-size: 0.82rem;
+}
+.pagination .disabled {
+    color: #cbd5e1;
+    border-color: #f1f5f9;
+    background: #f8fafc;
+    cursor: default;
+    pointer-events: none;
+}
+.pagination .pag-ellipsis {
+    border: none;
+    background: transparent;
+    color: #94a3b8;
+    padding: 9px 4px;
 }
 
 /* ── Deadline badge ── */

@@ -205,12 +205,45 @@ function maskName(string $name): string {
     </div>
 
     <!-- Pagination -->
-    <?php if ($totalPages > 1): ?>
-    <div class="pagination">
-        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-            <a class="<?= $i == $page ? 'active' : '' ?>"
-               href="?page=<?= $i ?>&search=<?= urlencode($keyword) ?>"><?= $i ?></a>
-        <?php endfor; ?>
+    <?php if ($totalPages >= 1 && $totalRows > 0): ?>
+    <div class="pagination-wrap">
+        <div class="pagination-info">
+            Menampilkan <?= min($offset + 1, $totalRows) ?>–<?= min($offset + $limit, $totalRows) ?> dari <?= $totalRows ?> campaign
+        </div>
+        <div class="pagination">
+            <!-- Prev -->
+            <?php if ($page > 1): ?>
+                <a href="?page=<?= $page - 1 ?>&search=<?= urlencode($keyword) ?>" class="pag-prev">&#8592; Sebelumnya</a>
+            <?php else: ?>
+                <span class="pag-prev disabled">&#8592; Sebelumnya</span>
+            <?php endif; ?>
+
+            <!-- Page numbers -->
+            <?php
+            $start = max(1, $page - 2);
+            $end   = min($totalPages, $page + 2);
+            if ($start > 1): ?>
+                <a href="?page=1&search=<?= urlencode($keyword) ?>">1</a>
+                <?php if ($start > 2): ?><span class="pag-ellipsis">...</span><?php endif; ?>
+            <?php endif; ?>
+
+            <?php for ($i = $start; $i <= $end; $i++): ?>
+                <a class="<?= $i == $page ? 'active' : '' ?>"
+                   href="?page=<?= $i ?>&search=<?= urlencode($keyword) ?>"><?= $i ?></a>
+            <?php endfor; ?>
+
+            <?php if ($end < $totalPages): ?>
+                <?php if ($end < $totalPages - 1): ?><span class="pag-ellipsis">...</span><?php endif; ?>
+                <a href="?page=<?= $totalPages ?>&search=<?= urlencode($keyword) ?>"><?= $totalPages ?></a>
+            <?php endif; ?>
+
+            <!-- Next -->
+            <?php if ($page < $totalPages): ?>
+                <a href="?page=<?= $page + 1 ?>&search=<?= urlencode($keyword) ?>" class="pag-next">Selanjutnya &#8594;</a>
+            <?php else: ?>
+                <span class="pag-next disabled">Selanjutnya &#8594;</span>
+            <?php endif; ?>
+        </div>
     </div>
     <?php endif; ?>
 </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Jun 2026 pada 12.15
+-- Waktu pembuatan: 05 Jun 2026 pada 08.25
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -52,7 +52,10 @@ INSERT INTO `campaigns` (`id`, `manager_id`, `title`, `category`, `location`, `d
 (6, 4, 'w', 'bencana', 'jogja', 'www', 10000000.00, 5000000.00, '2026-05-29 21:00:00', '1780062713_1359.jpeg', 'BCA = 149998898 Ewallet = 0897777777', '2026-05-29 13:51:53'),
 (7, 7, 'Bantuan Bencana Alam Sleman', 'Bencana Alam', 'Sleman, Yogyakarta', 'Penggalang dana untuk korban bencana alam di Sleman Yogyakarta pada tanggal 30 Maret 2026', 10000000.00, 0.00, '2026-07-30 12:59:00', '1780403362_6492.jpeg', 'BNI 71231001 a.n. Yayasan Sleman Peduli', '2026-06-02 12:29:22'),
 (8, 4, 'Beasiswa Pendidikan S1 untuk Yatim dan Dhuafa', 'Beasiswa Pendidikan', 'Bantul, Yogyakarta', 'Donasi beasiswa ini bertujuan untuk membantu anak-anak Bantul yang ingin lanjut tingkat yang lebih tinggi untuk pendidikan mereka', 19000000000.00, 0.00, '2027-04-06 23:59:00', '1780419438_9762.jpg', 'BCA = 72230654 a.n Ragio Rachel', '2026-06-02 16:57:18'),
-(9, 7, 'Program Makan Begizi Tidak Beracun', 'Berbagi Makan', 'Gondokusuman, Yogyakarta', 'Program makan ini bertujuan untuk siapapun bisa mendapatkan makan bergizi dengan gratis, makanan diolah oleh chef bintang 4 Hotel Ambarukmo yang siap melayani memasak untuk masyarakat Gondokusuman, Yogyakarta.', 25000000.00, 20000000.00, '2026-06-11 14:04:00', '1780470378_4087.jpg', 'BNI 71231001 a.n. Yayasan MBG tidak Beracun', '2026-06-03 07:06:18');
+(9, 7, 'Program Makan Begizi Tidak Beracun', 'Berbagi Makan', 'Gondokusuman, Yogyakarta', 'Program makan ini bertujuan untuk siapapun bisa mendapatkan makan bergizi dengan gratis, makanan diolah oleh chef bintang 4 Hotel Ambarukmo yang siap melayani memasak untuk masyarakat Gondokusuman, Yogyakarta.', 25000000.00, 20000000.00, '2026-06-11 14:04:00', '1780470378_4087.jpg', 'BNI 71231001 a.n. Yayasan MBG tidak Beracun', '2026-06-03 07:06:18'),
+(10, 4, 'Bantuan Donasi Saluran Air Bersih Papua', 'Bantuan Saluran Air', 'Papua, Jayapura', 'Air Bersih di Sekolah Papua, Awal Mula Pendidikan dan Masa Depan yang Lebih Baik', 50000000.00, 0.00, '2026-08-21 05:07:00', '1780639798_4970.jpg', 'BCA = 72230654 a.n Ragio Rachel', '2026-06-05 06:09:58'),
+(11, 4, 'Sumbangan Masjid untuk Yatim', 'Sumbangan Yatim', 'Bantul, Yogyakarta', 'Sumbangan donasi ini diperuntukan untuk kaum Yatim sekitar Bantul yang akan dikelola oleh Masjid Bantul', 20000000.00, 0.00, '2026-06-26 01:18:00', '1780639974_8895.jpg', 'BCA = 1234567810 Andreas', '2026-06-05 06:12:54'),
+(12, 4, 'Beasiswa Sekolah Dasar Papua', 'Beasiswa Pendidikan', 'Papua', 'Beasiswa Sekolah Dasar Papua, membantu anak anak yang belum pernah mengikuti sekolah', 50000000.00, 0.00, '2026-06-19 16:21:00', '1780640467_9740.jpg', 'BCA = 8627332', '2026-06-05 06:21:07');
 
 -- --------------------------------------------------------
 
@@ -154,7 +157,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `campaigns`
 --
 ALTER TABLE `campaigns`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `donations`
