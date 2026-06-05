@@ -102,7 +102,7 @@ Atau unduh sebagai ZIP lalu ekstrak.
 
 Salin seluruh folder project ke dalam `C:\xampp\htdocs\` (Windows) atau `/opt/lampp/htdocs/` (Linux).
 
-Contoh hasil akhir: `C:\xampp\htdocs\projekmini2\`
+Contoh hasil akhir: `C:\xampp\htdocs\Projek_Mini_2_fixed2\`
 
 **3. Jalankan XAMPP**
 
@@ -131,7 +131,7 @@ $db   = "projekmini2_db";
 Akses melalui browser:
 
 ```
-http://localhost/projekmini2/
+[http://localhost/projekmini2](http://localhost/UAS/Projek_Mini_2_fixed2/index.php)
 ```
 
 ---
