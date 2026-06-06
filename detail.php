@@ -312,8 +312,8 @@ $donatur_count = $dStmt->get_result()->fetch_assoc()['cnt'];
 
             <!-- Meta pills -->
             <div class="meta-row">
-                <span class="meta-pill"><span class="pi">&#128100;</span> <?= htmlspecialchars($campaign['manager_name']) ?></span>
-                <span class="meta-pill"><span class="pi">&#128205;</span> <?= htmlspecialchars($campaign['location']) ?></span>
+                <span class="meta-pill"><?= htmlspecialchars($campaign['manager_name']) ?></span>
+                <span class="meta-pill"><?= htmlspecialchars($campaign['location']) ?></span>
             </div>
 
             <!-- Stats -->

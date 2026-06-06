@@ -393,7 +393,7 @@ setTimeout(() => {
         <div class="footer-links">
             <a href="#">Tentang Berbagi Donasi Social</a>
             <span>|</span>
-            <a href="#">Syarat &amp; Ketentuan</a>
+            <a href="snk.php">Syarat &amp; Ketentuan</a>
             <span>|</span>
             <a href="#">Pusat Bantuan</a>
         </div>

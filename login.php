@@ -1,7 +1,12 @@
 <?php
 require 'config.php';
 
-$error = "";
+$error   = "";
+$success = "";
+
+if (isset($_GET['registered']) && $_GET['registered'] == '1') {
+    $success = "Akun berhasil dibuat. Silakan login.";
+}
 
 if (isset($_POST['login'])) {
     $email = trim($_POST['email']);
@@ -13,7 +18,11 @@ if (isset($_POST['login'])) {
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
 
-    if ($user && password_verify($password, $user['password'])) {
+    if (!$user) {
+        $error = "email_not_found";
+    } elseif (!password_verify($password, $user['password'])) {
+        $error = "wrong_password";
+    } else {
         $_SESSION['user_id']    = $user['id'];
         $_SESSION['user_name']  = $user['name'];
         $_SESSION['user_email'] = $user['email'];
@@ -27,8 +36,6 @@ if (isset($_POST['login'])) {
             header("Location: index.php");
         }
         exit;
-    } else {
-        $error = "Email atau password salah.";
     }
 }
 ?>
@@ -81,7 +88,7 @@ if (isset($_POST['login'])) {
             margin-bottom: 28px;
         }
         .brand-icon {
-            width: 110px; height: 110px;
+            width: 210px; height: 210px;
             border-radius: 16px;
             display: inline-flex; align-items: center; justify-content: center;
             margin-bottom: 12px;
@@ -278,9 +285,54 @@ if (isset($_POST['login'])) {
             transition: color .2s;
         }
         .back-home a:hover { color: #94a3b8; }
+
+        /* ── Toast notif ── */
+        #toast-notif {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 9999;
+            padding: 15px 24px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: .01em;
+            animation: slideDown .35s ease;
+        }
+        #toast-notif.show { display: block; }
+        #toast-notif.type-error {
+            background: #dc2626;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(220,38,38,.4);
+        }
+        #toast-notif.type-success {
+            background: #16a34a;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(22,163,74,.4);
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to   { transform: translateY(0);    opacity: 1; }
+        }
+        .toast-inner {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            max-width: 640px; margin: 0 auto;
+        }
+        .toast-close {
+            cursor: pointer; font-size: 1.1rem; opacity: .8; flex-shrink: 0;
+        }
+        .toast-close:hover { opacity: 1; }
     </style>
 </head>
 <body>
+    <!-- Toast notif -->
+    <div id="toast-notif">
+        <div class="toast-inner">
+            <span id="toast-msg"></span>
+            <span class="toast-close" onclick="hideToast()">&#10005;</span>
+        </div>
+    </div>
+
     <div class="login-wrap">
 
         <div class="brand">
@@ -296,10 +348,6 @@ if (isset($_POST['login'])) {
         <div class="login-card">
             <div class="card-title">Masuk ke Akun</div>
             <div class="card-sub">Selamat datang kembali</div>
-
-            <?php if ($error): ?>
-                <div class="alert-error">⚠️ <?= htmlspecialchars($error) ?></div>
-            <?php endif; ?>
 
             <form method="post" autocomplete="on">
                 <div class="form-group">
@@ -354,9 +402,36 @@ if (isset($_POST['login'])) {
 
 
     <script>
-        const eyeBtn    = document.getElementById('eyeBtn');
-        const pwInput   = document.getElementById('password');
-        const iconEye   = document.getElementById('iconEye');
+        // ── Toast ──
+        function showToast(msg, type) {
+            const el = document.getElementById('toast-notif');
+            document.getElementById('toast-msg').textContent = msg;
+            el.className = 'show type-' + type;
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(hideToast, 6000);
+        }
+        function hideToast() {
+            document.getElementById('toast-notif').className = '';
+        }
+
+        <?php if ($error === 'wrong_password'): ?>
+        window.addEventListener('DOMContentLoaded', function() {
+            showToast('Password yang anda ketik salah, mohon ulangi lagi.', 'error');
+        });
+        <?php elseif ($error === 'email_not_found'): ?>
+        window.addEventListener('DOMContentLoaded', function() {
+            showToast('Email anda belum terdaftar sebagai Donatur atau Pengelola.', 'error');
+        });
+        <?php elseif ($success): ?>
+        window.addEventListener('DOMContentLoaded', function() {
+            showToast('<?= addslashes($success) ?>', 'success');
+        });
+        <?php endif; ?>
+
+        // ── Eye toggle ──
+        const eyeBtn     = document.getElementById('eyeBtn');
+        const pwInput    = document.getElementById('password');
+        const iconEye    = document.getElementById('iconEye');
         const iconEyeOff = document.getElementById('iconEyeOff');
 
         eyeBtn.addEventListener('click', function () {

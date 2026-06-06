@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Jun 2026 pada 08.25
+-- Waktu pembuatan: 06 Jun 2026 pada 19.22
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -121,7 +121,9 @@ INSERT INTO `users` (`id`, `name`, `email`, `phone`, `address`, `avatar`, `passw
 (4, 'admin2', 'admin2@gmail.com', '08666666', '-', NULL, '$2y$10$BvchyA4O0Y04V0Z.OZN4wuyrv6ZKv5jjnkLsEuUm3d8VzJJyA2Dsq', 'manager', '2026-05-28 08:19:31'),
 (5, 'bencana jogja', 'bencanaJogja@gmail.com', '08977777777', '-', NULL, '$2y$10$dllJdBuw98GXDNMoXwuh/uUU0zfC22doR1hnfmgbqpqrl4QjV5oOu', 'manager', '2026-05-28 10:10:36'),
 (6, 'Maxz Kebon', 'leonandreanleon@gmail.com', '+62 896 0888 9456', 'Yogyakarta', 'avatar_6_1780480606.png', '$2y$10$zz45cnwJ3527BuJ5U2HqYumwPJUWt25wLveLIt3aF/z9ZHUjqIbwC', 'donor', '2026-06-02 10:28:51'),
-(7, 'LEONARDO ANDREAN', 'leonardo.andrean@ti.ukdw.ac.id', '0896088889456', 'Jogja', NULL, '$2y$10$jtj9FLUoIw93/qUkCfri/eRL3sxprdCV5yO5xS6xgK1i55u4P8Vxy', 'manager', '2026-06-02 10:42:27');
+(7, 'LEONARDO ANDREAN', 'leonardo.andrean@ti.ukdw.ac.id', '0896088889456', 'Jogja', NULL, '$2y$10$jtj9FLUoIw93/qUkCfri/eRL3sxprdCV5yO5xS6xgK1i55u4P8Vxy', 'manager', '2026-06-02 10:42:27'),
+(8, 'coba', 'coba@gmail.com', '089696969696', 'JOGJA', NULL, '$2y$10$BoYa7Ez2LizvV1w1fxo5MuDRhT83Za2IvlgsT2OhIvMJlRmifl6ey', 'donor', '2026-06-06 16:35:35'),
+(9, 'Wowo Tedi', 'wowotedibersatu@gmail.com', '082122212221', 'Gondokusuman, Yogyakarta', NULL, '$2y$10$0j5KQehdIib2ZCKfAZQeEOeEvSdl.VQQdUjHtl9acvJcwqxpfu1tm', 'donor', '2026-06-06 16:51:12');
 
 --
 -- Indexes for dumped tables
@@ -169,7 +171,7 @@ ALTER TABLE `donations`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
