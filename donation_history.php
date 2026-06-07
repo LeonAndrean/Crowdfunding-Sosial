@@ -285,8 +285,7 @@ $all_donations = $donations->fetch_all(MYSQLI_ASSOC);
 
     <!-- Action buttons -->
     <div class="actions-row">
-        <a href="summary.php" class="btn btn-summary">📊 Ringkasan Donasi</a>
-        <a href="index.php" class="btn btn-ghost">← Kembali ke Beranda</a>
+        <a href="summary.php" class="btn btn-summary">Ringkasan Donasi</a>
     </div>
 
     <!-- Section head -->
@@ -320,6 +319,10 @@ $all_donations = $donations->fetch_all(MYSQLI_ASSOC);
         </div>
         <?php endforeach; ?>
     <?php endif; ?>
+
+    <div style="margin-top:28px;">
+        <a href="javascript:history.back()" class="btn btn-ghost">Kembali</a>
+    </div>
 
     <div class="dash-footer">Copyright &copy; 2026 Berbagi Donasi Social. All Rights Reserved</div>
 

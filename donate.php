@@ -284,6 +284,41 @@ $pct = ($campaign['target_amount'] > 0)
         .btn-submit:hover { opacity: .9; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(37,99,235,.45); }
         .btn-submit:active { transform: translateY(0); }
 
+        /* ── Toast notif ── */
+        #toast-notif {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 9999;
+            padding: 15px 24px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: .01em;
+            animation: slideDown .35s ease;
+        }
+        #toast-notif.show { display: block; }
+        #toast-notif.type-error {
+            background: #dc2626;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(220,38,38,.4);
+        }
+        #toast-notif.type-success {
+            background: #16a34a;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(22,163,74,.4);
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to   { transform: translateY(0);    opacity: 1; }
+        }
+        .toast-inner {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            max-width: 700px; margin: 0 auto;
+        }
+        .toast-close { cursor: pointer; font-size: 1.1rem; opacity: .8; flex-shrink: 0; }
+        .toast-close:hover { opacity: 1; }
+
         @media (max-width: 600px) {
             .navbar { padding: 0 16px; }
             .card-body { padding: 20px; }
@@ -292,6 +327,13 @@ $pct = ($campaign['target_amount'] > 0)
     </style>
 </head>
 <body>
+
+<div id="toast-notif">
+    <div class="toast-inner">
+        <span id="toast-msg"></span>
+        <span class="toast-close" onclick="hideToast()">&#10005;</span>
+    </div>
+</div>
 
 <nav class="navbar">
     <a class="navbar-brand" href="index.php">
@@ -350,25 +392,12 @@ $pct = ($campaign['target_amount'] > 0)
                 </div>
             </div>
 
-            <?php if ($error): ?>
-                <div class="alert alert-error">
-                    <span class="alert-icon">&#9888;</span>
-                    <span><?= htmlspecialchars($error) ?></span>
-                </div>
-            <?php endif; ?>
-            <?php if ($success): ?>
-                <div class="alert alert-success">
-                    <span class="alert-icon">&#10003;</span>
-                    <span><?= htmlspecialchars($success) ?></span>
-                </div>
-            <?php endif; ?>
-
-            <form method="post" enctype="multipart/form-data" id="donateForm">
+            <form method="post" enctype="multipart/form-data" id="donateForm" novalidate>
 
                 <div class="form-group">
                     <label>Nominal Donasi (min. Rp10.000)</label>
-                    <input type="number" name="amount" placeholder="Contoh: 50000" min="10000"
-                           value="<?= htmlspecialchars($_POST['amount'] ?? '') ?>" required>
+                    <input type="number" name="amount" placeholder="Contoh: 50000"
+                           value="<?= htmlspecialchars($_POST['amount'] ?? '') ?>">
                 </div>
 
                 <div class="form-group">
@@ -410,7 +439,29 @@ $pct = ($campaign['target_amount'] > 0)
 </div>
 
 <script>
-    // File upload preview & label
+    // ── Toast ──
+    function showToast(msg, type) {
+        const el = document.getElementById('toast-notif');
+        document.getElementById('toast-msg').textContent = msg;
+        el.className = 'show type-' + type;
+        clearTimeout(window._toastTimer);
+        window._toastTimer = setTimeout(hideToast, 6000);
+    }
+    function hideToast() {
+        document.getElementById('toast-notif').className = '';
+    }
+
+    <?php if ($error): ?>
+    window.addEventListener('DOMContentLoaded', function() {
+        showToast('<?= addslashes(htmlspecialchars_decode($error)) ?>', 'error');
+    });
+    <?php elseif ($success): ?>
+    window.addEventListener('DOMContentLoaded', function() {
+        showToast('<?= addslashes(htmlspecialchars_decode($success)) ?>', 'success');
+    });
+    <?php endif; ?>
+
+    // ── File upload preview ──
     const proofFile  = document.getElementById('proofFile');
     const fileWrap   = document.getElementById('fileWrap');
     const fuFilename = document.getElementById('fuFilename');
@@ -419,44 +470,37 @@ $pct = ($campaign['target_amount'] > 0)
         if (this.files[0]) {
             fuFilename.textContent = this.files[0].name;
             fileWrap.classList.add('has-file');
-            document.getElementById('hintProof').classList.remove('show');
         } else {
             fuFilename.textContent = '';
             fileWrap.classList.remove('has-file');
         }
     });
 
-    // Metode pembayaran: hide hint on change
-    document.getElementById('paymentMethod').addEventListener('change', function () {
-        if (this.value) document.getElementById('hintPayment').classList.remove('show');
-    });
-
-    // Client-side validation before submit
+    // ── Client-side validation ──
     document.getElementById('donateForm').addEventListener('submit', function (e) {
-        let blocked = false;
-
+        const amount  = parseInt(document.querySelector('[name="amount"]').value) || 0;
         const payment = document.getElementById('paymentMethod').value;
-        const hintP   = document.getElementById('hintPayment');
-        if (!payment) {
-            hintP.classList.add('show');
-            blocked = true;
-        } else {
-            hintP.classList.remove('show');
-        }
-
         const hasFile = proofFile.files.length > 0;
-        const hintF   = document.getElementById('hintProof');
-        if (!hasFile) {
-            hintF.classList.add('show');
-            blocked = true;
-        } else {
-            hintF.classList.remove('show');
-        }
 
-        if (blocked) {
+        if (!amount && !payment && !hasFile) {
             e.preventDefault();
-            // scroll ke hint pertama yang muncul
-            document.querySelector('.field-hint.show')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            showToast('Lengkapi semua field donasi sebelum mengirim — nominal, metode pembayaran, dan bukti transfer wajib diisi.', 'error');
+            return;
+        }
+        if (!amount || amount < 10000) {
+            e.preventDefault();
+            showToast('Nominal donasi minimal Rp10.000. Mohon masukkan jumlah yang sesuai.', 'error');
+            return;
+        }
+        if (!payment) {
+            e.preventDefault();
+            showToast('Kamu belum memilih metode pembayaran. Silakan pilih terlebih dahulu.', 'error');
+            return;
+        }
+        if (!hasFile) {
+            e.preventDefault();
+            showToast('Kamu belum mengupload bukti pembayaran. Silakan lampirkan bukti transfer kamu.', 'error');
+            return;
         }
     });
 </script>

@@ -349,7 +349,7 @@ if (isset($_POST['login'])) {
             <div class="card-title">Masuk ke Akun</div>
             <div class="card-sub">Selamat datang kembali</div>
 
-            <form method="post" autocomplete="on">
+            <form method="post" autocomplete="on" novalidate>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <div class="input-wrap">
@@ -359,7 +359,6 @@ if (isset($_POST['login'])) {
                             name="email"
                             placeholder="contoh@email.com"
                             value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
-                            required
                             autocomplete="email"
                         >
                     </div>
@@ -373,7 +372,6 @@ if (isset($_POST['login'])) {
                             id="password"
                             name="password"
                             placeholder="Masukkan password"
-                            required
                             autocomplete="current-password"
                         >
                         <button type="button" class="eye-btn" id="eyeBtn" title="Tampilkan/Sembunyikan password" aria-label="Toggle password visibility">
@@ -440,6 +438,16 @@ if (isset($_POST['login'])) {
             iconEye.style.display    = isHidden ? 'none'  : 'block';
             iconEyeOff.style.display = isHidden ? 'block' : 'none';
             pwInput.focus();
+        });
+
+        // ── Empty field check before submit ──
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const email = document.getElementById('email').value.trim();
+            const pass  = document.getElementById('password').value;
+            if (!email || !pass) {
+                e.preventDefault();
+                showToast('Masukan Email dan Password kamu terlebih dahulu.', 'error');
+            }
         });
     </script>
 </body>
